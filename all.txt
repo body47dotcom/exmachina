@@ -21,3 +21,12 @@ mysql
 CREATE USER 'user-name'@'localhost' IDENTIFIED BY 'password';
 FLUSH PRIVILEGES;
 SELECT user FROM mysql.user;
+!
+iptables -A POSTROUTING -t nat -j MASQUERADE
+Данное правило будет сброшено после перезапуска системы, потому добавим его в скрипты автозапуска. В папке /etc/network/if-pre-up.d/ создадим файл nat и в него добавляем следующие строки
+
+#!/bin/sh
+/sbin/iptables -A POSTROUTING -t nat -j MASQUERADE
+Делаем этот файл «запускаемым».
+
+chmod +x /etc/network/if-pre-up.d/nat
