@@ -1,0 +1,23 @@
+echo <name> > /etc/hostname
+!
+nano /etc/network/interfaces
+auto enp0s3
+iface enp0s3 inet static
+address 192.168.1.1
+netmask 255.255.255.0
+!
+nano /etc/sysctl.conf
+net.ipv4.ip_forward = 1
+sudo cat /proc/sys/net/ipv4/ip_forward
+!
+apt-get install apache2  (systemctl status apache2.service)   
+apt-get install mariadb-server  (mysqladmin -u root -p version)   
+apt install php libapache2-mod-php php-mysql
+systemctl restart apache2
+!
+nano /var/www/html/index.html
+!
+mysql
+CREATE USER 'user-name'@'localhost' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
+SELECT user FROM mysql.user;
